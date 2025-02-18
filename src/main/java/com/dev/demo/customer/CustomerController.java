@@ -1,8 +1,8 @@
 package com.dev.demo.customer;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +25,14 @@ public class CustomerController {
                 .stream()
                 .map(customerMapper::toCustomerDto)
                 .toList();
+    }
+
+    @PostMapping
+    public ResponseEntity<CustomerDto> createCustomer(@RequestBody CreateCustomerRequest createCustomerRequest) {
+        Customer customerToCreate = customerMapper.toCustomer(createCustomerRequest);
+
+        Customer createdCustomer = customerService.createCustomer(customerToCreate);
+
+        return new ResponseEntity<>(customerMapper.toCustomerDto(createdCustomer), HttpStatus.CREATED);
     }
 }

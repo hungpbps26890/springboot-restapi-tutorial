@@ -13,4 +13,12 @@ public class CustomerMapper {
                 .address(customer.getAddress())
                 .build();
     }
+
+    public Customer toCustomer(CreateCustomerRequest createCustomerRequest) {
+        return Customer.builder()
+                .name(createCustomerRequest.getName())
+                .email(createCustomerRequest.getEmail())
+                .address(createCustomerRequest.getAddress())
+                .build();
+    }
 }
