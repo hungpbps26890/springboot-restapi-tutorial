@@ -1,4 +1,4 @@
-package com.dev.demo.exeption;
+package com.dev.demo.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

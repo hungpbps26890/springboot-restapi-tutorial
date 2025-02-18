@@ -1,9 +1,8 @@
 package com.dev.demo.customer;
 
-import com.dev.demo.exeption.CustomerNotFoundException;
-import com.dev.demo.exeption.EmailAlreadyExistsException;
+import com.dev.demo.exception.CustomerNotFoundException;
+import com.dev.demo.exception.EmailAlreadyExistsException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

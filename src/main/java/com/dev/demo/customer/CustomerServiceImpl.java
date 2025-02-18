@@ -1,7 +1,7 @@
 package com.dev.demo.customer;
 
-import com.dev.demo.exeption.CustomerNotFoundException;
-import com.dev.demo.exeption.EmailAlreadyExistsException;
+import com.dev.demo.exception.CustomerNotFoundException;
+import com.dev.demo.exception.EmailAlreadyExistsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
