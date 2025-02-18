@@ -14,11 +14,19 @@ public class CustomerMapper {
                 .build();
     }
 
-    public Customer toCustomer(CreateCustomerRequest createCustomerRequest) {
+    public Customer toCustomerToCreate(CreateCustomerRequest createCustomerRequest) {
         return Customer.builder()
                 .name(createCustomerRequest.getName())
                 .email(createCustomerRequest.getEmail())
                 .address(createCustomerRequest.getAddress())
+                .build();
+    }
+
+    public Customer toCustomerToUpdate(UpdateCustomerRequest updateCustomerRequest) {
+        return Customer.builder()
+                .name(updateCustomerRequest.getName())
+                .email(updateCustomerRequest.getEmail())
+                .address(updateCustomerRequest.getAddress())
                 .build();
     }
 }
