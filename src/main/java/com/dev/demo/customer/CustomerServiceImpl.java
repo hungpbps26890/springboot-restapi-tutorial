@@ -22,6 +22,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer createCustomer(Customer customerToCreate) {
+        String email = customerToCreate.getEmail();
+        if (customerRepository.existsByEmail(email))
+            throw new EmailAlreadyExistsException("Email " + email + " already exists");
+
         return customerRepository.save(customerToCreate);
     }
 
