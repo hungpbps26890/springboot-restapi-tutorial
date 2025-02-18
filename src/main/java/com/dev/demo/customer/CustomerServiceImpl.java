@@ -3,11 +3,13 @@ package com.dev.demo.customer;
 import com.dev.demo.exeption.CustomerNotFoundException;
 import com.dev.demo.exeption.EmailAlreadyExistsException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
@@ -41,7 +43,8 @@ public class CustomerServiceImpl implements CustomerService {
         Customer existingCustomer = getCustomerById(id);
 
         String email = customerToUpdate.getEmail();
-        if (customerRepository.existsByEmail(email) && !existingCustomer.getEmail().equals(email)) {
+        if (customerRepository.existsByEmail(email)
+                & !existingCustomer.getEmail().equals(email)) {
             throw new EmailAlreadyExistsException("Email " + email + " already exists");
         }
 
@@ -57,7 +60,9 @@ public class CustomerServiceImpl implements CustomerService {
         Customer existingCustomer = getCustomerById(id);
 
         String email = customerToUpdate.getEmail();
-        if (customerRepository.existsByEmail(email) && !existingCustomer.getEmail().equals(email)) {
+        if (email != null
+                & customerRepository.existsByEmail(email)
+                & !existingCustomer.getEmail().equals(email)) {
             throw new EmailAlreadyExistsException("Email " + email + " already exists");
         }
 
