@@ -13,4 +13,6 @@ public interface CustomerService {
     Customer fullUpdateCustomer(Long id, Customer customerToUpdate);
 
     Customer partialUpdate(Long id, Customer customerToUpdate);
+
+    void deleteCustomer(Long id);
 }
