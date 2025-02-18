@@ -7,4 +7,6 @@ public interface CustomerService {
     List<Customer> getAllCustomers();
 
     Customer createCustomer(Customer customerToCreate);
+
+    Customer getCustomerById(Long id);
 }

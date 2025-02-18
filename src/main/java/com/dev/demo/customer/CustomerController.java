@@ -1,5 +1,6 @@
 package com.dev.demo.customer;
 
+import com.dev.demo.exeption.CustomerNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +35,16 @@ public class CustomerController {
         Customer createdCustomer = customerService.createCustomer(customerToCreate);
 
         return new ResponseEntity<>(customerMapper.toCustomerDto(createdCustomer), HttpStatus.CREATED);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<CustomerDto> getCustomerById(@PathVariable("id") Long id) {
+        try {
+            Customer foundCustomer = customerService.getCustomerById(id);
+
+            return new ResponseEntity<>(customerMapper.toCustomerDto(foundCustomer), HttpStatus.OK);
+        } catch (CustomerNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

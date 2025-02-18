@@ -1,5 +1,6 @@
 package com.dev.demo.customer;
 
+import com.dev.demo.exeption.CustomerNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer createCustomer(Customer customerToCreate) {
         return customerRepository.save(customerToCreate);
+    }
+
+    @Override
+    public Customer getCustomerById(Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new CustomerNotFoundException("Customer not found with id " + id));
     }
 }
