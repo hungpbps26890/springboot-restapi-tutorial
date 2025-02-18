@@ -54,4 +54,16 @@ public class CustomerController {
 
         return new ResponseEntity<>(customerMapper.toCustomerDto(updatedCustomer), HttpStatus.OK);
     }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<CustomerDto> partialUpdateCustomer(
+            @PathVariable("id") Long id,
+            @RequestBody UpdateCustomerRequest updateCustomerRequest
+    ) {
+        Customer customerToUpdate = customerMapper.toCustomerToUpdate(updateCustomerRequest);
+
+        Customer updatedCustomer = customerService.partialUpdate(id, customerToUpdate);
+
+        return new ResponseEntity<>(customerMapper.toCustomerDto(updatedCustomer), HttpStatus.OK);
+    }
 }

@@ -11,4 +11,6 @@ public interface CustomerService {
     Customer getCustomerById(Long id);
 
     Customer fullUpdateCustomer(Long id, Customer customerToUpdate);
+
+    Customer partialUpdate(Long id, Customer customerToUpdate);
 }

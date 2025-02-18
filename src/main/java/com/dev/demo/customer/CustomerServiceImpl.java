@@ -5,6 +5,7 @@ import com.dev.demo.exeption.EmailAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -47,6 +48,22 @@ public class CustomerServiceImpl implements CustomerService {
         existingCustomer.setName(customerToUpdate.getName());
         existingCustomer.setEmail(email);
         existingCustomer.setAddress(customerToUpdate.getAddress());
+
+        return customerRepository.save(existingCustomer);
+    }
+
+    @Override
+    public Customer partialUpdate(Long id, Customer customerToUpdate) {
+        Customer existingCustomer = getCustomerById(id);
+
+        String email = customerToUpdate.getEmail();
+        if (customerRepository.existsByEmail(email) && !existingCustomer.getEmail().equals(email)) {
+            throw new EmailAlreadyExistsException("Email " + email + " already exists");
+        }
+
+        Optional.ofNullable(customerToUpdate.getName()).ifPresent(existingCustomer::setName);
+        Optional.ofNullable(customerToUpdate.getEmail()).ifPresent(existingCustomer::setEmail);
+        Optional.ofNullable(customerToUpdate.getAddress()).ifPresent(existingCustomer::setAddress);
 
         return customerRepository.save(existingCustomer);
     }
